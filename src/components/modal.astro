@@ -1,0 +1,240 @@
+<!-- Global Lightweight Detail Modal (Two-Column Responsive Layout) -->
+<div
+  id="detail-modal"
+  class="fixed inset-0 z-[200] hidden items-center justify-center p-3 sm:p-5 md:p-8 bg-black/80 backdrop-blur-md transition-opacity duration-200"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <!-- Modal backdrop click target -->
+  <div class="fixed inset-0 cursor-pointer" data-close-modal></div>
+
+  <!-- Modal content card: Wide two-column modal on desktop/laptop -->
+  <div
+    class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-[#141414] border border-[#ffffff15] rounded-3xl p-5 sm:p-7 md:p-8 shadow-2xl text-[var(--white)] z-10 flex flex-col gap-6"
+  >
+    <!-- Top Bar: Category badge & Close button -->
+    <div class="flex items-center justify-between gap-4 border-b border-[#ffffff10] pb-4">
+      <div class="flex items-center gap-2">
+        <span
+          id="modal-category"
+          class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-[var(--sec)]/15 text-[var(--sec)] border border-[var(--sec)]/30 font-semibold"
+        >
+          Category
+        </span>
+        <span
+          id="modal-period"
+          class="text-xs font-mono text-[var(--white-icon)] px-2.5 py-1 rounded-full bg-[var(--white-icon-tr)] border border-[#ffffff10]"
+        >
+          Period
+        </span>
+      </div>
+
+      <button
+        type="button"
+        data-close-modal
+        aria-label="Close modal"
+        class="size-9 rounded-full bg-[#ffffff08] hover:bg-[#ffffff15] border border-[#ffffff10] flex items-center justify-center text-[var(--white-icon)] hover:text-white transition-colors cursor-pointer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main Two-Column Layout: Left (Image / Showcase Slot), Right (Explanation & Details) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <!-- Left Column: Image / Wireframe Preview container -->
+      <div class="md:col-span-5 flex flex-col gap-3">
+        <div
+          id="modal-image-container"
+          class="relative w-full overflow-hidden rounded-2xl border border-dashed border-[#ffffff20] bg-[#ffffff03] flex flex-col items-center justify-center p-6 text-center min-h-[220px] sm:min-h-[260px] md:min-h-[300px]"
+        >
+          <div class="p-3 rounded-full bg-[#ffffff08] text-[var(--sec)] mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+              <circle cx="9" cy="9" r="2"/>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+          </div>
+          <span id="modal-image-caption" class="text-xs sm:text-sm font-medium text-[var(--white)] px-2">
+            Documentation Preview
+          </span>
+          <span class="text-[11px] text-[var(--white-icon)]/60 mt-1">
+            Screenshot / visual evidence slot
+          </span>
+        </div>
+
+        <!-- External Action Links placed under the image on desktop -->
+        <div id="modal-actions" class="flex flex-wrap items-center gap-2.5 pt-1"></div>
+      </div>
+
+      <!-- Right Column: Titles, Descriptions, Highlights & Tags -->
+      <div class="md:col-span-7 flex flex-col gap-4">
+        <div>
+          <h3 id="modal-title" class="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight leading-snug">
+            Modal Title
+          </h3>
+          <p id="modal-subtitle" class="text-sm sm:text-base text-[var(--sec)] font-medium mt-1">
+            Organization or Secondary Label
+          </p>
+        </div>
+
+        <!-- Description -->
+        <p id="modal-description" class="text-xs sm:text-sm text-[var(--white-icon)] leading-relaxed">
+          Description goes here
+        </p>
+
+        <!-- Points List -->
+        <div id="modal-points-wrapper" class="space-y-2 bg-[#ffffff04] p-4 rounded-xl border border-[#ffffff08]">
+          <h4 class="text-xs uppercase tracking-wider text-[var(--sec)] font-semibold">
+            Key Deliverables & Responsibilities
+          </h4>
+          <ul id="modal-points" class="space-y-2 text-xs sm:text-sm text-[var(--white-icon)]"></ul>
+        </div>
+
+        <!-- Tags -->
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-[var(--white-icon)]/60 font-semibold mb-2">
+            Associated Skills & Domains
+          </p>
+          <div id="modal-tags" class="flex flex-wrap gap-1.5"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function setupDetailModal() {
+    const modal = document.getElementById("detail-modal");
+    if (!modal) return;
+
+    const modalTitle = document.getElementById("modal-title");
+    const modalSubtitle = document.getElementById("modal-subtitle");
+    const modalCategory = document.getElementById("modal-category");
+    const modalPeriod = document.getElementById("modal-period");
+    const modalImageCaption = document.getElementById("modal-image-caption");
+    const modalDescription = document.getElementById("modal-description");
+    const modalPoints = document.getElementById("modal-points");
+    const modalPointsWrapper = document.getElementById("modal-points-wrapper");
+    const modalTags = document.getElementById("modal-tags");
+    const modalActions = document.getElementById("modal-actions");
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    function openModalWithData(data) {
+      if (modalTitle) modalTitle.textContent = data.title || "";
+      if (modalSubtitle) {
+        modalSubtitle.textContent = data.subtitle || "";
+        modalSubtitle.style.display = data.subtitle ? "block" : "none";
+      }
+      if (modalCategory) {
+        modalCategory.textContent = data.category || "Detail";
+        modalCategory.style.display = data.category ? "inline-block" : "none";
+      }
+      if (modalPeriod) {
+        modalPeriod.textContent = data.period || "";
+        modalPeriod.style.display = data.period ? "inline-block" : "none";
+      }
+      if (modalImageCaption) {
+        modalImageCaption.textContent = data.imageCaption || data.title || "Preview";
+      }
+      if (modalDescription) {
+        modalDescription.textContent = data.description || "";
+        modalDescription.style.display = data.description ? "block" : "none";
+      }
+
+      // Render points
+      if (modalPoints && modalPointsWrapper) {
+        modalPoints.innerHTML = "";
+        const points = Array.isArray(data.points) ? data.points : [];
+        if (points.length > 0) {
+          modalPointsWrapper.style.display = "block";
+          points.forEach((pt) => {
+            const li = document.createElement("li");
+            li.className = "flex items-start gap-2.5 leading-relaxed";
+            li.innerHTML = `<span class="text-[var(--sec)] select-none">▸</span><span>${pt}</span>`;
+            modalPoints.appendChild(li);
+          });
+        } else {
+          modalPointsWrapper.style.display = "none";
+        }
+      }
+
+      // Render tags
+      if (modalTags) {
+        modalTags.innerHTML = "";
+        const tags = Array.isArray(data.tags) ? data.tags : [];
+        tags.forEach((tag) => {
+          const span = document.createElement("span");
+          span.className = "text-xs px-2.5 py-1 rounded-md bg-[#ffffff08] text-[var(--white-icon)] border border-[#ffffff10]";
+          span.textContent = tag;
+          modalTags.appendChild(span);
+        });
+      }
+
+      // Render action buttons
+      if (modalActions) {
+        modalActions.innerHTML = "";
+        if (data.link) {
+          const a = document.createElement("a");
+          a.href = data.link;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.className = "text-xs font-semibold px-4 py-2 rounded-xl bg-[var(--sec)] text-black hover:opacity-90 transition inline-flex items-center gap-1.5";
+          a.innerHTML = `<span>${data.linkLabel || "View External Link"}</span> ↗`;
+          modalActions.appendChild(a);
+        }
+        if (data.preview && data.preview !== data.link) {
+          const a = document.createElement("a");
+          a.href = data.preview;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.className = "text-xs font-medium px-4 py-2 rounded-xl bg-[#ffffff08] border border-[#ffffff15] text-[var(--white-icon)] hover:text-white transition inline-flex items-center gap-1.5";
+          a.innerHTML = `<span>Live Demo</span> ↗`;
+          modalActions.appendChild(a);
+        }
+      }
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    // Bind triggers with data-modal-payload
+    document.querySelectorAll("[data-open-modal]").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        try {
+          const payload = JSON.parse(trigger.getAttribute("data-modal-payload") || "{}");
+          openModalWithData(payload);
+        } catch (err) {
+          console.error("Modal payload error:", err);
+        }
+      });
+    });
+
+    // Close buttons
+    modal.querySelectorAll("[data-close-modal]").forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+
+    // Escape key
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+  }
+
+  // Run on mount
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupDetailModal);
+  } else {
+    setupDetailModal();
+  }
+</script>

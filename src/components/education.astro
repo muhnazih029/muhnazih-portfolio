@@ -1,0 +1,312 @@
+---
+interface EducationItem {
+  degree: string;
+  institution: string;
+  period: string;
+  badge?: string;
+  gpa?: string;
+  thesisOrCapstone: {
+    label: string;
+    topic: string;
+  };
+  details: string[];
+}
+
+const education: EducationItem[] = [
+  {
+    degree: "Pendidikan Teknik Informatika dan Komputer (PTIK)",
+    institution: "Universitas Negeri Semarang (UNNES)",
+    period: "Aug 2022 - Jan 2026",
+    gpa: "GPA 3.8 / 4.0",
+    thesisOrCapstone: {
+      label: "Thesis",
+      topic: "Performance Comparison Analysis of Express.js-based RESTful API and Supabase BaaS.",
+    },
+    details: [
+      "Computer Programming & Web Programming",
+      "Data Structures & Software Engineering",
+      "Computer Networks, Operating Systems & Theory of Computation",
+    ],
+  },
+  {
+    degree: "Cloud Computing Cohort",
+    institution: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+    period: "Sep 2024 - Jan 2025",
+    badge: "Kampus Merdeka MSIB",
+    thesisOrCapstone: {
+      label: "Capstone Project",
+      topic: "Al-Venture – Machine Learning and Cloud Computing-based tourism destination recommendation platform.",
+    },
+    details: [
+      "Cloud Computing Fundamentals & Architecture",
+      "Cloud Security & Identity Management",
+      "Automated Cloud Deployment & Monitoring on GCP",
+    ],
+  },
+];
+
+// Extracted from training & certification profile (Google Cloud, Dicoding, Coursera)
+const certifications = [
+  {
+    title: "Menjadi Google Cloud Architect",
+    issuer: "Dicoding Indonesia",
+    date: "Mar 2025",
+    link: "https://www.dicoding.com/certificates/JMZVELVVQPN9",
+    tag: "Cloud Architecture",
+  },
+  {
+    title: "Google Cloud Computing Foundations Certificate",
+    issuer: "Google Cloud Skills Boost (Credly)",
+    date: "Oct 2024",
+    link: "https://www.credly.com/badges/57dc1cf1-25f9-476a-85ef-5314ce9bce1a/linked_in_profile",
+    tag: "Cloud Foundations",
+  },
+  {
+    title: "Menjadi Google Cloud Engineer",
+    issuer: "Dicoding Indonesia",
+    date: "Nov 2024",
+    link: "https://www.dicoding.com/certificates/EYX4J8D55ZDL",
+    tag: "GCP Engineering",
+  },
+  {
+    title: "Belajar Membuat Aplikasi Back-End untuk Pemula dengan Google Cloud",
+    issuer: "Dicoding Indonesia",
+    date: "Nov 2024",
+    link: "https://www.dicoding.com/certificates/GRX54WKOVP0M",
+    tag: "Backend & GCP",
+  },
+  {
+    title: "Preparing for Your Associate Cloud Engineer Journey",
+    issuer: "Google Cloud Skills Boost",
+    date: "Oct 2024",
+    link: "https://www.cloudskillsboost.google/public_profiles/e5844c5a-ef18-44a0-8f6a-c2486a846c32/badges/11906445",
+    tag: "ACE Badge",
+  },
+  {
+    title: "Belajar Dasar Pemrograman JavaScript",
+    issuer: "Dicoding Indonesia",
+    date: "Oct 2024",
+    link: "https://www.dicoding.com/certificates/JMZV448NOXN9",
+    tag: "JavaScript",
+  },
+  {
+    title: "Belajar Dasar Pemrograman Web",
+    issuer: "Dicoding Indonesia",
+    date: "Sep 2024",
+    link: "https://www.dicoding.com/certificates/KEXL1OLOMXG2",
+    tag: "Web Dev",
+  },
+  {
+    title: "Belajar Dasar Git dengan GitHub",
+    issuer: "Dicoding Indonesia",
+    date: "Sep 2024",
+    link: "https://www.dicoding.com/certificates/0LZ067V90Z65",
+    tag: "Git & VCS",
+  },
+  {
+    title: "Pengenalan ke Logika Pemrograman (Programming Logic 101)",
+    issuer: "Dicoding Indonesia",
+    date: "Sep 2024",
+    link: "https://www.dicoding.com/certificates/6RPN12764X2M",
+    tag: "Logic & Algorithms",
+  },
+  {
+    title: "Memulai Dasar Pemrograman untuk Menjadi Pengembang Software",
+    issuer: "Dicoding Indonesia",
+    date: "Sep 2024",
+    link: "https://www.dicoding.com/certificates/1RXYL9Q13PVM",
+    tag: "Software Engineering",
+  },
+];
+
+const organizations = [
+  {
+    role: "Inventory Division Member",
+    club: "Photography and Videography Student Club - CLIC (UNNES)",
+    period: "Dec 2023 - Dec 2024",
+    points: [
+      "Supervised and procured organizational assets and equipment.",
+      "Prepared logistics availability reports to support smooth event execution.",
+      "Studied camera components and facilitated equipment rental services to clients in the surrounding area.",
+    ],
+  },
+];
+---
+
+<section id="education" class="py-14 sm:py-16 md:py-20 border-t border-[#ffffff10] text-[var(--white)] w-full">
+  <div class="max-w-5xl xl:max-w-6xl mx-auto space-y-10 sm:space-y-12">
+    <div>
+      <h2 class="text-xs sm:text-sm text-[var(--sec)] mb-1.5 shiny-sec font-medium tracking-wide uppercase">Background</h2>
+      <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight">Education & Credentials</h3>
+    </div>
+
+    <!-- Education Grid with Modal Triggers -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {
+        education.map((edu) => {
+          const payload = JSON.stringify({
+            title: edu.degree,
+            subtitle: edu.institution,
+            category: "Formal Education",
+            period: edu.period,
+            description: `${edu.thesisOrCapstone.label}: ${edu.thesisOrCapstone.topic}`,
+            points: edu.details,
+            tags: [edu.gpa || "", edu.badge || "", "Academic Record"].filter(Boolean),
+            imageCaption: `${edu.degree} - ${edu.institution} Academic Showcase`,
+          });
+
+          return (
+            <button
+              type="button"
+              data-open-modal
+              data-modal-payload={payload}
+              class="text-left bg-[#1414143a] p-5 sm:p-6 md:p-7 rounded-2xl border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/50 transition-all flex flex-col justify-between cursor-pointer group"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                  <span class="text-[10px] sm:text-xs font-mono text-[var(--white-icon)] px-2 py-0.5 rounded-full bg-[var(--white-icon-tr)] border border-[#ffffff0d] whitespace-nowrap">
+                    {edu.period}
+                  </span>
+                  <div class="flex items-center gap-1.5">
+                    {edu.gpa && (
+                      <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--sec)]/15 text-[var(--sec)] border border-[var(--sec)]/30 whitespace-nowrap">
+                        {edu.gpa}
+                      </span>
+                    )}
+                    {edu.badge && (
+                      <span class="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full bg-[#10b981]/15 text-[#34d399] border border-[#10b981]/30 whitespace-nowrap">
+                        {edu.badge}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <h4 class="text-base sm:text-lg md:text-xl font-semibold text-[var(--white)] group-hover:text-[var(--sec)] transition-colors mt-2 sm:mt-3 leading-snug">
+                  {edu.degree}
+                </h4>
+                <p class="text-xs sm:text-sm text-[var(--sec)] mt-1 font-medium">
+                  {edu.institution}
+                </p>
+
+                <div class="my-3 sm:my-4 p-3 rounded-xl bg-[#ffffff05] border border-[#ffffff0a]">
+                  <p class="text-[10px] sm:text-[11px] font-semibold text-[var(--sec)] uppercase tracking-wider mb-1">
+                    {edu.thesisOrCapstone.label}
+                  </p>
+                  <p class="text-xs sm:text-sm text-[var(--white-icon)] leading-snug">
+                    {edu.thesisOrCapstone.topic}
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-xs text-[var(--sec)] pt-3 border-t border-[#ffffff08]">
+                <span>View academic documentation</span>
+                <span>↗</span>
+              </div>
+            </button>
+          );
+        })
+      }
+    </div>
+
+    <!-- Certifications List (Direct Links to Providers) & Organization -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 pt-2">
+      {/* Certifications: 7 cols */}
+      <div class="md:col-span-7 bg-[#1414143a] p-5 sm:p-6 rounded-2xl border border-[#ffffff08] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--sec)]">
+                <path d="M12 15l-2 5l9-13h-6l2-5l-9 13h6z"/>
+              </svg>
+              <h4 class="text-base sm:text-lg md:text-xl font-semibold text-[var(--white)]">Certifications & Training</h4>
+            </div>
+            <span class="text-[10px] sm:text-xs text-[var(--white-icon)]/60 font-mono">
+              Direct Verification
+            </span>
+          </div>
+
+          <div class="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+            {
+              certifications.map((cert) => (
+                <a
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="p-2.5 sm:p-3 rounded-xl bg-[#ffffff05] border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/50 transition-all flex items-center justify-between gap-2.5 group"
+                >
+                  <div class="space-y-0.5 min-w-0 pr-2">
+                    <h5 class="text-xs sm:text-sm font-medium text-[var(--white)] group-hover:text-[var(--sec)] transition-colors truncate">
+                      {cert.title}
+                    </h5>
+                    <p class="text-[10px] sm:text-[11px] text-[var(--white-icon)] truncate">
+                      {cert.issuer} • <span class="font-mono text-[var(--sec)]">{cert.date}</span>
+                    </p>
+                  </div>
+                  <span class="shrink-0 text-[10px] sm:text-[11px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-[var(--white-icon-tr)] text-[var(--sec)] border border-[#ffffff10] group-hover:bg-[var(--sec)] group-hover:text-black transition-colors font-medium whitespace-nowrap">
+                    Verify ↗
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      {/* Organization: 5 cols with modal trigger */}
+      <div class="md:col-span-5 bg-[#1414143a] p-5 sm:p-6 rounded-2xl border border-[#ffffff08] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--sec)]">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h4 class="text-base sm:text-lg md:text-xl font-semibold text-[var(--white)]">Organization Activity</h4>
+          </div>
+
+          {
+            organizations.map((org) => {
+              const payload = JSON.stringify({
+                title: org.role,
+                subtitle: org.club,
+                category: "Organization",
+                period: org.period,
+                points: org.points,
+                tags: ["UNNES", "CLIC", "Asset Management", "Logistics"],
+                imageCaption: "CLIC UNNES Inventory & Videography Team Showcase",
+              });
+
+              return (
+                <button
+                  type="button"
+                  data-open-modal
+                  data-modal-payload={payload}
+                  class="w-full text-left space-y-2.5 p-3.5 sm:p-4 rounded-xl bg-[#ffffff03] border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/50 transition-all cursor-pointer group"
+                >
+                  <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                    <h5 class="text-xs sm:text-sm md:text-base font-semibold text-[var(--white)] group-hover:text-[var(--sec)] transition-colors leading-snug">
+                      {org.role}
+                    </h5>
+                    <!-- Organization date badge on mobile -->
+                    <span class="text-[10px] sm:text-xs font-mono text-[var(--white-icon)] whitespace-nowrap">
+                      {org.period}
+                    </span>
+                  </div>
+                  <p class="text-xs text-[var(--sec)] font-medium">
+                    {org.club}
+                  </p>
+
+                  <div class="flex items-center justify-between text-xs text-[var(--sec)] pt-2.5 border-t border-[#ffffff08]">
+                    <span>View activities & responsibility</span>
+                    <span>↗</span>
+                  </div>
+                </button>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

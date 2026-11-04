@@ -1,0 +1,149 @@
+---
+interface ExperienceItem {
+  id: string;
+  role: string;
+  organization: string;
+  period: string;
+  category: string;
+  points: string[];
+  tags: string[];
+  imageCaption: string;
+}
+
+const experiences: ExperienceItem[] = [
+  {
+    id: "bangkit",
+    role: "Cloud Computing Distinction Cohort",
+    organization: "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+    period: "Sep 2024 - Jan 2025",
+    category: "Cloud Program / Kampus Merdeka",
+    points: [
+      "Completed intensive cloud curriculum covering Cloud Architecture, Security, Storage, and DevOps deployment pipelines.",
+      "Delivered Capstone Project 'Al-Venture', architecting REST APIs, database systems, and containerized deployment on Google Cloud Run.",
+      "Graduated with Distinction recognition in the Cloud Computing path.",
+    ],
+    tags: ["Google Cloud Platform", "Cloud Run", "Docker", "REST API", "Distinction Cohort"],
+    imageCaption: "Bangkit Academy Distinction Certificate & Capstone Architecture",
+  },
+  {
+    id: "spbe",
+    role: "Internship - SPBE Division (Electronic-Based Government System)",
+    organization: "Dinas Komunikasi, Informatika, Statistik dan Persandian Kota Semarang (PRIGEL MBKM)",
+    period: "Jan 2025 - Jun 2025",
+    category: "Government Internship / PRIGEL MBKM",
+    points: [
+      "Acted as Project Manager for the intern team, overseeing task allocation, website development, and graphic design assets for the institution.",
+      "Managed the digitization and archiving of official letters and event invitations into an internal system integrated with Google Calendar and Notion.",
+      "Handled administrative data for large-scale public events adhering to strict data confidentiality standards.",
+    ],
+    tags: ["PRIGEL MBKM", "Project Management", "Web Development", "Google Calendar API", "Notion"],
+    imageCaption: "Diskominfo Kota Semarang SPBE System & Letter Archiving Flow",
+  },
+  {
+    id: "lantip",
+    role: "Student Coordinator & Grade 10 Informatics Teacher",
+    organization: "Teaching Intern (PLP/PPL) UNNES LANTIP - SMAN 11 Semarang",
+    period: "Jul 2025 - Sep 2025",
+    category: "Teaching Internship / UNNES LANTIP",
+    points: [
+      "Coordinated 24 student interns, formed working divisions, and served as primary liaison between school, faculty advisors, and students.",
+      "Managed classroom administration including lesson module preparation, quizzes, and grade evaluation summaries for Grade 10 students.",
+    ],
+    tags: ["PLP LANTIP UNNES", "Team Leadership", "Pedagogy", "Classroom Administration"],
+    imageCaption: "SMAN 11 Semarang Teaching Activity & Intern Coordination",
+  },
+  {
+    id: "seminar",
+    role: "Committee Chair & Speaker",
+    organization: 'Digital Security Seminar "Protect Your Data, Secure Your World" - SMP IT Cahaya Ummat',
+    period: "Jun 2025",
+    category: "Public Speaking & Event Leadership",
+    points: [
+      "Led and organized event requirements from preparation to execution for an educational cybersecurity seminar.",
+      "Designed and delivered cybersecurity educational materials using an interactive phishing simulation website.",
+    ],
+    tags: ["Committee Chair", "Speaker", "Cybersecurity", "Phishing Simulation"],
+    imageCaption: "Cybersecurity Seminar Presentation & Live Phishing Demo",
+  },
+  {
+    id: "kayoe",
+    role: "Mitra Pengusaha Indonesia - Logyard Admin Division",
+    organization: "PT. Sumber Graha Sejahtera Butuh Semarang - Sampoerna Kayoe",
+    period: "Jun 2026 - Aug 2026",
+    category: "Industrial Internship / ERP Automation",
+    points: [
+      "Developed Excel VBA macros for operational data processing automation and SAP integration.",
+      "Ensured field data consistency with digital inputs and SAP records (Modules ZMB51 & MB52).",
+      "Built an OCR-based web application prototype to digitize physical field records for checker verification and data entry.",
+    ],
+    tags: ["Sampoerna Kayoe", "SAP ZMB51/MB52", "Excel VBA", "OCR Web Prototype"],
+    imageCaption: "Sampoerna Kayoe Logyard Automation Suite & OCR Prototype",
+  },
+];
+---
+
+<section id="experience" class="py-14 sm:py-16 md:py-20 border-t border-[#ffffff10] text-[var(--white)] w-full">
+  <div class="max-w-5xl xl:max-w-6xl mx-auto">
+    <div class="mb-8 sm:mb-10">
+      <h2 class="text-xs sm:text-sm text-[var(--sec)] mb-1.5 shiny-sec font-medium tracking-wide uppercase">Career Journey</h2>
+      <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight">Experience</h3>
+    </div>
+
+    <!-- Timeline List with Modal Triggers -->
+    <div class="relative pl-5 sm:pl-7 md:pl-8 border-l border-[#ffffff15] space-y-5 sm:space-y-6">
+      {
+        experiences.map((exp) => {
+          const payload = JSON.stringify({
+            title: exp.role,
+            subtitle: exp.organization,
+            category: exp.category,
+            period: exp.period,
+            imageCaption: exp.imageCaption,
+            points: exp.points,
+            tags: exp.tags,
+          });
+
+          return (
+            <div class="relative group">
+              {/* Timeline bullet: Compact size & perfectly centered on mobile & desktop */}
+              <div class="absolute -left-[27px] sm:-left-[35px] md:-left-[39px] top-5 size-3 sm:size-3.5 rounded-full bg-[var(--background)] border-2 border-[var(--sec)] group-hover:scale-125 group-hover:bg-[var(--sec)] transition-all duration-300 shadow-[0_0_8px_rgba(164,118,255,0.4)]" />
+
+              {/* Clickable Card that Opens Modal */}
+              <button
+                type="button"
+                data-open-modal
+                data-modal-payload={payload}
+                class="w-full text-left bg-[#1414143a] p-4 sm:p-5 md:p-6 rounded-2xl border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/50 transition-all duration-300 group-hover:translate-x-0.5 cursor-pointer"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1.5 sm:gap-2 mb-1.5">
+                  <div class="space-y-0.5 min-w-0 pr-2">
+                    <h4 class="text-base sm:text-lg md:text-xl font-semibold text-[var(--white)] group-hover:text-[var(--sec)] transition-colors leading-snug">
+                      {exp.role}
+                    </h4>
+                    <p class="text-xs sm:text-sm text-[var(--sec)] font-medium">
+                      {exp.organization}
+                    </p>
+                  </div>
+
+                  <!-- Date badge: Single line, compact font & padding on mobile -->
+                  <span class="inline-flex items-center text-[10px] sm:text-xs font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[#ffffff10] whitespace-nowrap self-start sm:self-auto shrink-0 mt-1 sm:mt-0">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <!-- Skills / Tags on Front Card -->
+                <div class="flex flex-wrap items-center gap-1.5 pt-2.5 mt-2.5 border-t border-[#ffffff08]">
+                  {exp.tags.map((tag) => (
+                    <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-md bg-[#ffffff08] text-[var(--white-icon)] border border-[#ffffff0d]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

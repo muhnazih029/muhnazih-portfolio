@@ -1,0 +1,91 @@
+---
+interface Competency {
+  title: string;
+  tagline: string;
+  badge: string;
+  icon: string;
+  highlights: string[];
+}
+
+const competencies: Competency[] = [
+  {
+    title: "Fullstack & Web Architecture",
+    tagline: "Scalable APIs & Modern Reactive Frontends",
+    badge: "Core Engineering",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--sec)]"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/></svg>`,
+    highlights: [
+      "Modular backend API architecture with Laravel, Express.js, and Supabase BaaS",
+      "Interactive, lightweight UI interfaces with Tailwind CSS, Astro, and React",
+      "Rigorous API load & stress testing using Apache JMeter (p90/p95 latency metrics)",
+    ],
+  },
+  {
+    title: "Cloud Infrastructure & DevOps",
+    tagline: "Cloud Native Deployments & Container Systems",
+    badge: "GCP & Containers",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--sec)]"><path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42-1.89-1.92-3.5-4-3.5a4.37 4.37 0 0 0-4 2.82B5 10c-2 0-3 1.5-3 3.5A3.5 3.5 0 0 0 5.5 17"/></svg>`,
+    highlights: [
+      "Google Cloud Platform deployment pipelines utilizing Cloud Run, App Engine & GCE",
+      "Microservice containerization with Docker and reproducible Linux runtime environments",
+      "Resource telemetry, cloud logging, security auditing, and latency optimization",
+    ],
+  },
+  {
+    title: "Network Engineering & Systems",
+    tagline: "Mini-Server Hardware, Mesh VPN & Firewalls",
+    badge: "Linux & Routing",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--sec)]"><rect width="20" height="8" x="2" y="3" rx="2" ry="2"/><rect width="20" height="8" x="2" y="13" rx="2" ry="2"/><line x1="6" x2="6.01" y1="7" y2="7"/><line x1="6" x2="6.01" y1="17" y2="17"/><line x1="10" x2="10.01" y1="7" y2="7"/><line x1="10" x2="10.01" y1="17" y2="17"/></svg>`,
+    highlights: [
+      "Armbian Linux home server architecture deployed on cost-efficient Set-Top Box (STB) hardware",
+      "Encrypted mesh connectivity with Tailscale and Cloudflare Zero Trust Tunnels",
+      "MikroTik router firewall rules, NAT configurations, and local bandwidth isolation",
+    ],
+  },
+];
+---
+
+<div class="text-left w-full space-y-6">
+  <div>
+    <h2 class="text-lg text-[var(--sec)] mb-1 shiny-sec">What I Bring</h2>
+    <h3 class="text-3xl md:text-4xl font-semibold text-[var(--white)]">
+      Core Competencies
+    </h3>
+  </div>
+
+  <!-- Distinct Bento / Feature Cards Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    {
+      competencies.map((c) => (
+        <div class="group bg-[#1414143a] p-6 rounded-2xl border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/60 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_0_20px_rgba(164,118,255,0.12)]">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="p-2.5 rounded-xl bg-[#ffffff08] group-hover:scale-110 transition-transform">
+                <Fragment set:html={c.icon} />
+              </div>
+              <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[#ffffff0d]">
+                {c.badge}
+              </span>
+            </div>
+
+            <h4 class="text-lg font-semibold text-[var(--white)] group-hover:text-[var(--sec)] transition-colors mb-1">
+              {c.title}
+            </h4>
+            <p class="text-xs text-[var(--sec)]/90 font-medium mb-4">
+              {c.tagline}
+            </p>
+
+            <ul class="space-y-2.5 text-xs text-[var(--white-icon)] leading-relaxed pt-3 border-t border-[#ffffff08]">
+              {c.highlights.map((h) => (
+                <li class="flex items-start gap-2">
+                  <span class="text-[var(--sec)] select-none">▸</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+

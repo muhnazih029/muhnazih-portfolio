@@ -1,0 +1,52 @@
+<!-- Back To Top Button -->
+<button
+  id="back-to-top"
+  type="button"
+  aria-label="Scroll back to top"
+  class="fixed bottom-20 md:bottom-8 right-6 z-50 p-3 rounded-full bg-[#181226] border border-[var(--sec)]/40 text-[var(--sec)] shadow-[0_0_20px_rgba(164,118,255,0.25)] hover:scale-110 hover:border-[var(--sec)] hover:bg-[var(--sec)] hover:text-black transition-all duration-300 opacity-0 pointer-events-none translate-y-4"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m18 15-6-6-6 6"/>
+  </svg>
+</button>
+
+<script is:inline>
+  function setupBackToTop() {
+    const btn = document.getElementById("back-to-top");
+    if (!btn) return;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        btn.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
+        btn.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
+      } else {
+        btn.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
+        btn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
+      }
+    }, { passive: true });
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupBackToTop);
+  } else {
+    setupBackToTop();
+  }
+</script>
+

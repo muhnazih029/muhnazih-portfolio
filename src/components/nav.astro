@@ -1,0 +1,155 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+const navItems: NavItem[] = [
+  {
+    label: "Home",
+    href: "#home",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z"></path></svg>`,
+  },
+  {
+    label: "Experience",
+    href: "#experience",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 6H16V4C16 2.89543 15.1046 2 14 2H10C8.89543 2 8 2.89543 8 4V6H4C2.89543 6 2 6.89543 2 8V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V8C22 6.89543 21.1046 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z"/></svg>`,
+  },
+  {
+    label: "Education",
+    href: "#education",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L1 7L12 12L21 7.89V16H23V7L12 2ZM3.45 7L12 3.11L20.55 7L12 10.89L3.45 7ZM5 10.68V16C5 18.76 8.13 21 12 21C15.87 21 19 18.76 19 16V10.68L12 13.88L5 10.68Z"/></svg>`,
+  },
+  {
+    label: "Projects",
+    href: "#projects",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 5V19H20V7H11.5858L9.58579 5H4ZM12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z"></path></svg>`,
+  },
+  {
+    label: "Skills",
+    href: "#skills",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`,
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21.7267 2.95694L16.2734 22.0432C16.1225 22.5716 15.7979 22.5956 15.5563 22.1126L11 13L1.9229 9.36919C1.41322 9.16532 1.41953 8.86022 1.95695 8.68108L21.0432 2.31901C21.5716 2.14285 21.8747 2.43866 21.7267 2.95694ZM19.0353 5.09647L6.81221 9.17085L12.4488 11.4255L15.4895 17.5068L19.0353 5.09647Z"></path></svg>`,
+  },
+];
+---
+
+<header class="flex justify-center w-full">
+  <nav
+    id="main-nav"
+    class="fixed left-1/2 -translate-x-1/2 z-[100] bg-[#121212e6] border border-[#ffffff15] backdrop-blur-xl transition-all duration-300 ease-in-out md:top-5 md:bottom-auto bottom-0 w-full md:w-auto md:rounded-full px-2 sm:px-3 md:px-5 py-2 shadow-2xl"
+  >
+    <ul
+      class="flex w-full justify-around md:justify-center md:gap-3 lg:gap-4 items-center"
+    >
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-nav-link
+              class="nav-link flex flex-col md:flex-row items-center gap-1 md:gap-1.5 text-[var(--white-icon)] transition-all duration-300 text-[10px] sm:text-[11px] md:text-xs lg:text-sm font-medium py-1 sm:py-1.5 px-2.5 sm:px-3 rounded-full hover:text-white group relative"
+            >
+              <span class="md:hidden flex items-center justify-center">
+                <Fragment set:html={item.icon} />
+              </span>
+              <span>{item.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  @media (max-width: 767px) {
+    nav {
+      border-radius: 1.25rem 1.25rem 0 0;
+      border-bottom: none;
+      padding-bottom: env(safe-area-inset-bottom, 0.75rem);
+    }
+  }
+
+  .nav-link.active {
+    color: #ffffff !important;
+    background-color: #ffffff14;
+    border: 1px solid #a476ff50;
+    box-shadow: 0 0 12px rgba(164, 118, 255, 0.25);
+  }
+</style>
+
+<script is:inline>
+  function setupNavigation() {
+    const navLinks = document.querySelectorAll("[data-nav-link]");
+    const sectionIds = ["home", "experience", "education", "projects", "skills", "contact"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((sec) => sec !== null);
+
+    // Smooth scroll with subtle offset for fixed navbar
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const topOffset = window.innerWidth >= 768 ? 80 : 20;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - topOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        }
+      });
+    });
+
+    // Scrollspy for active state
+    function updateActiveNav() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      let currentSectionId = "home";
+
+      if (scrollY + windowHeight >= documentHeight - 60) {
+        currentSectionId = "contact";
+      } else {
+        sections.forEach((section) => {
+          if (!section) return;
+          const sectionTop = section.offsetTop - 160;
+          if (scrollY >= sectionTop) {
+            currentSectionId = section.id;
+          }
+        });
+      }
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === `#${currentSectionId}`) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    updateActiveNav();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupNavigation);
+  } else {
+    setupNavigation();
+  }
+</script>

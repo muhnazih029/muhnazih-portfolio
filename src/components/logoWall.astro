@@ -1,0 +1,95 @@
+---
+const rawBase = import.meta.env.BASE_URL || "/";
+const baseUrl = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+
+const technologies = [
+  "astro",
+  "laravel",
+  "php",
+  "python",
+  "bun",
+  "tanstack",
+  "react",
+  "typeScript",
+  "tailwindcss",
+  "next",
+  "nodejs",
+  "HTML5",
+  "CSS3",
+  "javaScript",
+  "git",
+  "supabase",
+  "mysql",
+  "bash",
+];
+
+const displayNames = {
+  astro: "Astro",
+  laravel: "Laravel",
+  php: "PHP",
+  python: "Python",
+  bun: "Bun",
+  tanstack: "TanStack",
+  react: "React",
+  typeScript: "TypeScript",
+  tailwindcss: "TailwindCSS",
+  next: "Next.js",
+  nodejs: "Node.js",
+  HTML5: "HTML5",
+  CSS3: "CSS3",
+  javaScript: "JavaScript",
+  git: "Git",
+  supabase: "Supabase",
+  mysql: "MySQL",
+  bash: "Bash",
+};
+---
+
+<div class="relative overflow-x-hidden py-8">
+  <div class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20"></div>
+
+  <div class="flex animate-scroll w-max will-change-transform">
+    {
+      [...technologies, ...technologies].map((tech, index) => (
+        <div 
+          class="flex items-center gap-2.5 pr-12 md:pr-16 group transition-all duration-300"
+          aria-hidden={index >= technologies.length ? "true" : "false"}
+        >
+          <img
+            src={`${baseUrl}svg/${tech}.svg`}
+            alt={tech}
+            class="h-7 w-7 object-contain transition-transform group-hover:scale-110 opacity-70 group-hover:opacity-100"
+            width="28"
+            height="28"
+            loading={index < technologies.length ? "eager" : "lazy"}
+            decoding="async"
+          />
+          <span class="text-base font-medium text-[var(--white-icon)] whitespace-nowrap group-hover:text-[var(--white)] transition-colors">
+            {displayNames[tech as keyof typeof displayNames] || tech}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  @keyframes scroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 60s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .animate-scroll {
+      animation-duration: 50s;
+    }
+  }
+</style>

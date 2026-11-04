@@ -1,0 +1,129 @@
+---
+interface SkillCategory {
+  title: string;
+  badge: string;
+  description: string;
+  skills: { name: string; level: string; highlight?: boolean }[];
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    title: "Programming Languages",
+    badge: "Core",
+    description: "Multi-paradigm programming for backend architectures, automation scripting, and system software.",
+    skills: [
+      { name: "JavaScript", level: "Advanced", highlight: true },
+      { name: "PHP", level: "Advanced", highlight: true },
+      { name: "Python", level: "Proficient", highlight: true },
+      { name: "TypeScript", level: "Proficient", highlight: true },
+      { name: "C++", level: "Intermediate" },
+      { name: "Bash / Shell", level: "Proficient" },
+    ],
+  },
+  {
+    title: "Web & Frameworks",
+    badge: "Fullstack",
+    description: "Component-driven web stacks, relational/document BaaS, and high-performance REST APIs.",
+    skills: [
+      { name: "Laravel", level: "Advanced", highlight: true },
+      { name: "Express.js", level: "Advanced", highlight: true },
+      { name: "Supabase BaaS", level: "Advanced", highlight: true },
+      { name: "RESTful API", level: "Advanced", highlight: true },
+      { name: "Tailwind CSS", level: "Advanced", highlight: true },
+      { name: "React", level: "Proficient" },
+      { name: "Astro", level: "Proficient" },
+      { name: "HTML5 / CSS3", level: "Advanced" },
+    ],
+  },
+  {
+    title: "Cloud & DevOps & Systems",
+    badge: "Infrastructure",
+    description: "Cloud-native services, Linux kernel environments, containerization, and networking.",
+    skills: [
+      { name: "Google Cloud Platform", level: "Certified", highlight: true },
+      { name: "GCP Cloud Run / App Engine", level: "Advanced", highlight: true },
+      { name: "Docker Containerization", level: "Proficient", highlight: true },
+      { name: "Linux (Debian, Arch, Armbian)", level: "Advanced", highlight: true },
+      { name: "MikroTik Routing & Firewall", level: "Proficient", highlight: true },
+      { name: "Tailscale & Cloudflare", level: "Proficient" },
+    ],
+  },
+  {
+    title: "Enterprise & Productivity Tools",
+    badge: "Operations",
+    description: "Enterprise ERP synchronization, load benchmark testing, automation macros, and workflows.",
+    skills: [
+      { name: "SAP (ZMB51 / MB52)", level: "Production", highlight: true },
+      { name: "Excel VBA Automation", level: "Advanced", highlight: true },
+      { name: "Apache JMeter", level: "Benchmarking", highlight: true },
+      { name: "Git & GitHub", level: "Advanced", highlight: true },
+      { name: "Obsidian Vault", level: "Proficient" },
+      { name: "Google Workspace Admin", level: "Proficient" },
+    ],
+  },
+];
+---
+
+<section id="skills" class="py-16 md:py-20 lg:py-24 border-t border-[#ffffff10] text-[var(--white)] w-full">
+  <div class="max-w-5xl xl:max-w-6xl mx-auto space-y-10">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div>
+        <h2 class="text-base sm:text-lg text-[var(--sec)] mb-2 shiny-sec font-medium">Expertise</h2>
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">Technical Skills</h3>
+      </div>
+      <div class="flex items-center gap-3 text-xs text-[var(--white-icon)]">
+        <span class="inline-flex items-center gap-1.5">
+          <span class="size-2 rounded-full bg-[var(--sec)] shadow-[0_0_8px_rgba(164,118,255,0.8)]"></span>
+          Primary Expertise
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <span class="size-2 rounded-full bg-[#ffffff25]"></span>
+          Proficient
+        </span>
+      </div>
+    </div>
+
+    <!-- Redesigned Modern Tech Skill Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        skillCategories.map((category) => (
+          <div class="bg-[#1414143a] p-6 rounded-2xl border border-[#ffffff08] hover:border-[var(--sec)]/40 hover:bg-[#181226]/40 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h4 class="text-lg sm:text-xl font-semibold text-[var(--white)]">
+                  {category.title}
+                </h4>
+                <span class="text-xs font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[var(--white-icon-tr)] text-[var(--white-icon)] border border-[#ffffff10]">
+                  {category.badge}
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-[var(--white-icon)] mb-5 leading-relaxed">
+                {category.description}
+              </p>
+
+              <!-- Interactive Badge Chips with Level Indicators -->
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {category.skills.map((skill) => (
+                  <div
+                    class={`p-2.5 rounded-xl border transition-all flex flex-col justify-between gap-1 ${
+                      skill.highlight
+                        ? "bg-[#181226]/90 border-[var(--sec)]/40 hover:border-[var(--sec)] hover:shadow-[0_0_12px_rgba(164,118,255,0.2)]"
+                        : "bg-[#1414149c] border-[#ffffff0d] hover:border-[#ffffff20]"
+                    }`}
+                  >
+                    <span class={`text-xs font-semibold truncate ${skill.highlight ? "text-[var(--white)]" : "text-[var(--white-icon)]"}`}>
+                      {skill.name}
+                    </span>
+                    <span class={`text-[10px] font-mono tracking-wide ${skill.highlight ? "text-[var(--sec)]" : "text-[var(--white-icon)]/60"}`}>
+                      {skill.level}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

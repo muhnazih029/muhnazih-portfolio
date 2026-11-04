@@ -1,0 +1,72 @@
+---
+import LogoWall from "../components/logoWall.astro";
+import CoreCompetencies from "../components/coreCompetencies.astro";
+---
+
+<section class="text-[var(--white)] pt-16 sm:pt-24 md:pt-28 pb-10 w-full" id="home">
+  <div class="max-w-4xl xl:max-w-5xl mx-auto space-y-10">
+    <div class="text-left space-y-4">
+      <p class="text-sm sm:text-base md:text-lg text-[var(--white-icon)] font-medium">
+        Hi, I'm <span class="text-[var(--white)] font-semibold">Muhammad Nazih</span>
+      </p>
+
+      <!-- Balanced Headline: 3/4 screen width, not overwhelming on mobile or desktop -->
+      <h1 class="text-[var(--white)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-snug max-w-2xl">
+        <span class="text-[var(--sec)] shiny-sec">Software Developer</span> & <br />
+        Cloud Infrastructure
+      </h1>
+
+      <p class="text-sm sm:text-base md:text-lg text-[var(--white-icon)] max-w-2xl leading-relaxed">
+        An Informatics and Computer Engineering graduate passionate about building software.
+      </p>
+
+      <!-- Action Buttons: View Experience & Get In Touch -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a
+          href="#experience"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--sec)] text-black font-semibold text-xs sm:text-sm hover:opacity-90 transition shadow-[0_0_20px_rgba(164,118,255,0.3)]"
+        >
+          <span>View Experience</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1414149c] border border-[var(--white-icon-tr)] text-[var(--white)] font-medium text-xs sm:text-sm hover:bg-[var(--white-icon-tr)] hover:border-[var(--sec)]/40 transition"
+        >
+          <span>Get in touch</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tech Marquee (Logo Wall) -->
+    <LogoWall />
+
+    <!-- Core Competencies Section -->
+    <div class="pt-2">
+      <CoreCompetencies />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .shiny-sec {
+    background: linear-gradient(135deg, #a476ff 25%, #eee5ff 50%, #a476ff 75%);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 100% 50%;
+    }
+    30%,
+    70% {
+      background-position: 0% 50%;
+    }
+  }
+</style>

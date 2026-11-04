@@ -1,0 +1,215 @@
+---
+interface Project {
+  title: string;
+  category: string;
+  period: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+  link?: string;
+  preview?: string;
+  status: string;
+  imageCaption: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "Home Server Configuration & Network Security",
+    category: "Personal Project / Infrastructure",
+    period: "May 2026 - Now",
+    description: "Designed and implemented a mini-server infrastructure leveraging Armbian Linux on Set-Top Box (STB) hardware, providing self-hosted network services and encrypted mesh routing.",
+    highlights: [
+      "Configured lightweight Armbian Linux on STB hardware for energy-efficient, 24/7 server uptime.",
+      "Implemented secure remote network access mesh and DNS routing with Tailscale and Cloudflare Tunnels.",
+      "Engineered MikroTik firewall filtering rules, NAT traversal, and local security policy isolation.",
+    ],
+    tags: ["Armbian Linux", "STB Hardware", "Tailscale", "Cloudflare", "MikroTik Firewall"],
+    link: "https://github.com/muhnazih029",
+    preview: "https://muhnazih.azdastudio.my.id",
+    status: "Active / Deployed",
+    imageCaption: "Armbian Linux STB Home Server Architecture & Network Diagram",
+  },
+  {
+    title: "RESTful API Performance & Stability Analysis",
+    category: "Undergraduate Thesis Research",
+    period: "Oct 2025 - Nov 2025",
+    description: "Empirical benchmarking study evaluating throughput, scalability, and resilience under high-concurrency workloads between custom Node.js/Express architectures and Supabase BaaS.",
+    highlights: [
+      "Conducted rigorous load testing, stress testing, and endurance testing with Apache JMeter under concurrent request ramps.",
+      "Analyzed p90/p95 latency percentiles, error rates, throughput (RPS), and resource consumption under traffic surges.",
+      "Formulated architectural recommendations for choosing between self-hosted Express backends vs. managed BaaS solutions.",
+    ],
+    tags: ["Express.js", "Supabase BaaS", "Apache JMeter", "Performance Benchmarking", "RESTful API"],
+    link: "https://github.com/muhnazih029",
+    preview: "https://github.com/muhnazih029",
+    status: "Thesis Research",
+    imageCaption: "JMeter Performance Benchmark Graphs & Latency Analysis",
+  },
+  {
+    title: "Al-Venture Recommendation Platform",
+    category: "Bangkit Academy Capstone Project",
+    period: "Nov 2024 - Dec 2024",
+    description: "Machine Learning and Cloud-powered tourism destination recommendation system connecting intelligent ML algorithms with scalable backend microservices.",
+    highlights: [
+      "Designed database schema integration, data normalization, and REST API communication endpoints.",
+      "Integrated Machine Learning model endpoints with backend services for personalized tourist recommendations.",
+      "Containerized microservices and deployed automated deployment pipelines on Google Cloud Run.",
+    ],
+    tags: ["Google Cloud Run", "GCP", "REST API", "Machine Learning Integration", "Docker"],
+    link: "https://github.com/AiVenture6/Ai-Venture-Cloud-Computing",
+    preview: "https://github.com/muhnazih029",
+    status: "GCP Deployed",
+    imageCaption: "Al-Venture Cloud Run Microservices & Application Architecture",
+  },
+  {
+    title: "Logyard Automation & OCR Data Verification Suite",
+    category: "PT. Sumber Graha Sejahtera (Sampoerna Kayoe)",
+    period: "Jun 2026 - Aug 2026",
+    description: "Operational digitization and automated inventory pipeline for logyard management integrated with SAP ERP.",
+    highlights: [
+      "Created automated Excel VBA macros for daily field inventory reconciliation, reducing manual calculation times significantly.",
+      "Synced physical wood log entries with SAP ERP modules (ZMB51 & MB52) with stringent discrepancy audits.",
+      "Built a prototype OCR-based web application to digitize handwriting on physical delivery notes directly for field checkers.",
+    ],
+    tags: ["SAP (ZMB51/MB52)", "Excel VBA", "OCR Prototype", "Data Verification", "Process Automation"],
+    link: "https://github.com/muhnazih029/logscan",
+    preview: "https://github.com/muhnazih029",
+    status: "Enterprise Production",
+    imageCaption: "Logyard OCR Verification Prototype & SAP Integration Workflow",
+  },
+];
+---
+
+<section
+  id="projects"
+  class="py-14 sm:py-16 md:py-20 border-t border-[#ffffff10] text-[var(--white)] w-full"
+>
+  <div class="max-w-5xl xl:max-w-6xl mx-auto space-y-8 sm:space-y-10">
+    <div>
+      <h2 class="text-xs sm:text-sm text-[var(--sec)] mb-1.5 shiny-sec font-medium tracking-wide uppercase">Portfolio</h2>
+      <h3 class="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight">Featured Projects</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+      {
+        projects.map((project) => {
+          const payload = JSON.stringify({
+            title: project.title,
+            subtitle: project.category,
+            category: "Project Case Study",
+            period: project.period,
+            description: project.description,
+            points: project.highlights,
+            tags: project.tags,
+            link: project.link,
+            linkLabel: "View Source Code / Research",
+            preview: project.preview,
+            imageCaption: project.imageCaption,
+          });
+
+          return (
+            <div class="group bg-[#1414143a] p-5 sm:p-6 rounded-2xl border border-[#ffffff08] hover:border-[var(--sec)]/50 hover:bg-[#181226]/50 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                  <!-- Project date badge -->
+                  <span class="text-[10px] sm:text-xs font-mono text-[var(--white-icon)] px-2 py-0.5 sm:px-2.5 rounded-full bg-[var(--white-icon-tr)] border border-[#ffffff0d] whitespace-nowrap">
+                    {project.period}
+                  </span>
+                  <span class="inline-block py-0.5 px-2.5 sm:px-3 text-[10px] sm:text-xs bg-[var(--sec)]/15 border border-[var(--sec)]/30 rounded-full text-[var(--sec)] font-medium whitespace-nowrap">
+                    {project.status}
+                  </span>
+                </div>
+
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-[var(--sec)] font-semibold block mb-1">
+                  {project.category}
+                </span>
+
+                <!-- Title opens modal -->
+                <button
+                  type="button"
+                  data-open-modal
+                  data-modal-payload={payload}
+                  class="text-left w-full group/btn cursor-pointer"
+                >
+                  <h4 class="text-base sm:text-lg md:text-xl font-semibold text-[var(--white)] group-hover/btn:text-[var(--sec)] group-hover:text-[var(--sec)] transition-colors leading-snug mb-2 sm:mb-3">
+                    {project.title} ↗
+                  </h4>
+                </button>
+
+                <!-- Project Skills / Tech Stack on Front -->
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  {project.tags.map((tag) => (
+                    <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-md bg-[#ffffff08] text-[var(--white-icon)] border border-[#ffffff0d]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Footer with Trigger to Modal Details -->
+              <div class="flex items-center justify-between pt-3.5 border-t border-[#ffffff0a]">
+                <button
+                  type="button"
+                  data-open-modal
+                  data-modal-payload={payload}
+                  class="text-xs text-[var(--sec)] font-medium hover:underline inline-flex items-center gap-1 cursor-pointer"
+                >
+                  <span>Open details & preview</span>
+                  <span>↗</span>
+                </button>
+
+                <div class="flex items-center gap-2">
+                  {project.link && (
+                    <a
+                      target="_blank"
+                      href={project.link}
+                      aria-label="Repository"
+                      class="size-7 sm:size-8 rounded-lg bg-[#ffffff08] hover:bg-[var(--white-icon-tr)] text-[var(--white-icon)] hover:text-white flex items-center justify-center transition border border-[#ffffff10]"
+                      title="Repository"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5 sm:size-4">
+                        <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"></path>
+                      </svg>
+                    </a>
+                  )}
+                  {project.preview && (
+                    <a
+                      target="_blank"
+                      href={project.preview}
+                      aria-label="Live Demo"
+                      class="size-7 sm:size-8 rounded-lg bg-[#ffffff08] hover:bg-[var(--sec)]/20 hover:text-[var(--sec)] text-[var(--white-icon)] flex items-center justify-center transition border border-[#ffffff10]"
+                      title="Live Demo"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3.5 sm:size-4">
+                        <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <a
+      target="_blank"
+      href="https://github.com/muhnazih029"
+      aria-label="GitHub Profile"
+      class="w-full flex items-center justify-center gap-2 mt-6 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)] hover:scale-[1.01]"
+    >
+      <span class="text-xs sm:text-sm">Explore more repositories on GitHub</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-4"
+      >
+        <path
+          d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</section>
