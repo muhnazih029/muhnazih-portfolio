@@ -20,6 +20,9 @@ export default defineConfig({
         "astro:toolbar:internal": path.resolve(__dirname, "./src/dummy-toolbar.js"),
       },
     },
+    preview: {
+      allowedHosts: ["muhnazih.azdastudio.my.id"],
+    },
   },
   output: "static",
   build: {
@@ -28,8 +31,5 @@ export default defineConfig({
   server: {
     host: true,
     port: 4321,
-  },
-  preview: {
-    allowedHosts: ["muhnazih.azdastudio.my.id"],
   },
 });
